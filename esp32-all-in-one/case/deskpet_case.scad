@@ -1,7 +1,7 @@
 // ============================================================
 // ESP32-S3 all-in-one desk pet - parametric case (OpenSCAD)
 // ============================================================
-// Parts:  PART="shell" | "sled" | "lid" | "stand" | "facetest" | "assembly"
+// Parts:  PART="shell" | "sled" | "lid" | "stand" | "facetest" | "assembly" | "hero" | "exploded"
 // "facetest" = only the first 7 mm of the shell: a 30-minute print to check
 // the display, camera and radar fit before the 3+ hour shell print.
 // Export: openscad -D 'PART="shell"' -o stl/shell.stl deskpet_case.scad
@@ -275,6 +275,24 @@ if (PART == "shell") shell();
 else if (PART == "sled")  rotate([180, 0, 0]) sled();   // standoffs up
 else if (PART == "lid")   rotate([180, 0, 0]) lid();   // print outer face down
 else if (PART == "stand") stand();
+else if (PART == "hero") {
+  // presentation render: standing upright on its stand, face lit with eyes
+  rotate([90, 0, 0]) translate([0, 0, -D_shell]) {
+    color("#262626") shell();
+    color("#050505") translate([disp_c[0] - disp_glass[0]/2, disp_c[1] - disp_glass[1]/2, face - 0.8]) cube([disp_glass[0], disp_glass[1], 0.8]);
+    for (sx = [-1, 1]) color("#3ee6ff") translate([disp_c[0] + sx*8 - 5, disp_c[1] - 7, face - 0.9]) cube([10, 14, 0.2]);
+    color("#444") translate([0, 0, D_shell]) lid();
+  }
+}
+else if (PART == "exploded") {
+  // shell face-down at the bottom, parts lifted out along Z (towards the back)
+  color("#2b2b2b") shell();
+  color("#111") translate([disp_c[0] - disp_glass[0]/2, disp_c[1] - disp_glass[1]/2, -12]) cube([disp_glass[0], disp_glass[1], 1]);
+  color("#1a7f5a") translate([esp_x(), (H - esp_pcb[1])/2, sled_z + 30 - 3 - esp_pcb[2]]) cube(esp_pcb);
+  color("orange") translate([0, 0, sled_z + 30]) sled();
+  color("#3a6fd8") translate([(W - batt[0])/2, 24, D_shell + 50 - batt[2]]) cube(batt);
+  color("#555") translate([0, 0, D_shell + 75]) lid();
+}
 else if (PART == "facetest") intersection() { shell(); translate([-1, -1, -1]) cube([W + 2, H + 2, 8]); }
 else {
   color("dimgray") shell();

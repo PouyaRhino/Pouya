@@ -2,7 +2,9 @@
 
 A palm-sized desk companion built only from parts you own or have on order: animated eyes on a 2" screen, presence radar, room sensors, head-pat touch, speaker + mic for AI voice chat, and a camera.
 
-![case](case/img/assembly.png)
+![case](case/img/hero.png) ![inside](case/img/exploded.png)
+
+![moods](docs/moods-concept.jpg)
 
 ## Start here
 
