@@ -1,5 +1,7 @@
 # 5. Assembly and bring-up, step by step
 
+**Pictures for every step: [wiring and build guide](08-wiring-build-guide.md).**
+
 Rule of thumb: **test every part on the breadboard first, then build it into the case.** Debugging inside a closed case is painful.
 
 ## Step 0: before parts arrive

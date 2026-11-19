@@ -17,6 +17,7 @@ A palm-sized desk companion built only from parts you own or have on order: anim
 | 5 | [Assembly and bring-up](docs/05-assembly-bringup.md) | Steps from breadboard to finished robot |
 | 6 | [Firmware plan](docs/06-firmware-plan.md) | Bring-up → pet moods → XiaoZhi AI voice |
 | 7 | [Buy list](docs/07-buy-list.md) | ~$35 of missing parts, IP5306 charger first |
+| 8 | [Wiring and build guide](docs/08-wiring-build-guide.md) | Colour wiring diagram + step-by-step pictures with a test after each module |
 
 ## Folder layout
 
