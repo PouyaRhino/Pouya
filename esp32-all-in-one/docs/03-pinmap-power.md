@@ -48,22 +48,22 @@ Other wiring:
 - MAX98357A: VIN 5 V, GAIN unconnected (9 dB), SD unconnected (mono mix of L+R, on). Speaker on its + and - outputs (bridge-tied: never connect either speaker wire to GND).
 - Camera on a bare OV5640 module: PWDN to GND, RESET to 3.3 V via 10k. Not needed on the S3-CAM board.
 
-## Head / body split (robot case)
+## Head / stand split (Pebble case)
 
-The ESP32 lives in the head; the battery side lives in the body. **8 wires go through the neck tube** (12 mm bore, 30 AWG silicone, leave a 3 cm loop so the head can turn about ±90°):
+The ESP32 lives in the head; the battery side lives in the stand. **8 wires go through the neck post** (12 mm bore, 30 AWG silicone, leave a 3 cm loop):
 
-| # | Wire | From (body) | To (head) |
+| # | Wire | From (stand) | To (head) |
 |---|---|---|---|
 | 1 | 5 V | IP5306 5 V out | MAX98357A VIN, and through the Schottky to the ESP32 5V pin |
 | 2 | GND | IP5306 GND | ESP32 GND |
 | 3 | 3.3 V | AHT20 + BMP280 VCC | ESP32 3V3 |
-| 4 | VBAT sense | 100k/100k divider middle (divider sits in the body) | GPIO1 |
+| 4 | VBAT sense | 100k/100k divider middle (divider sits in the stand) | GPIO1 |
 | 5 | Radar TX | LD2410C TX (1k resistor at the radar end) | GPIO43 |
 | 6 | Radar OUT | LD2410C OUT | GPIO46 |
 | 7 | SDA | AHT20 + BMP280 SDA | GPIO4 |
 | 8 | SCL | AHT20 + BMP280 SCL | GPIO5 |
 
-Everything else stays in the head: display, camera, mic, amp + speaker, BH1750, TTP223 (head pat on the top of the head). The radar gets its 5 V and GND locally in the body. The amp is glued to the inside of the head's back lid, next to the speaker. **No pin changes**, `pins.h` is the same.
+Everything else stays in the head: display, camera, mic, amp + speaker (both on the head's back lid), BH1750, TTP223. The radar gets 5 V and GND locally in the stand. **No pin changes**, `pins.h` is the same.
 
 ## Which board: the CAM board (recommended) or the plain N16R8
 
@@ -105,4 +105,4 @@ IP5306 gives 2.4 A, so peaks are fine. The board's AMS1117 3.3 V regulator (usua
 - Plan on it mostly living on USB power at the desk, with the battery for moving it around.
 
 ### Heat
-In the robot case the ESP32 and camera are in the head and the AHT20/BMP280 are in the body, behind their own side vents, so they read close to room temperature. The head's back lid has vents for the ESP32. Still expect the AHT20 to read 0.5 to 2 °C high: calibrate an offset in software against a room thermometer.
+In the Pebble case the ESP32 and camera are in the head and the AHT20/BMP280 are in the stand, with vents underneath, so they read close to room temperature. The head's back lid has vents for the ESP32. Still expect the AHT20 to read 0.5 to 2 °C high: calibrate an offset in software against a room thermometer.
