@@ -47,7 +47,7 @@ Rule of thumb: **test every part on the breadboard first, then build it into the
 6. Unplug USB from the PC, power from the battery only, repeat `a` (all tests). If the board resets during beeps, the 5 V sags: add the 470 µF capacitor across the amp's VIN/GND.
 
 ## Step 8: print and dry fit
-1. Measure parts, update `MEASURE` values in `case/pebble_case.scad`, print `pebble_face.stl` (black) and `pebble_facetest.stl`. Check the display, camera and face plate fit.
+1. Measure parts, update `MEASURE` values in `case/pebble_case.scad`, print `pebble_snaptest.stl` (25 min) and check that the lid clicks on and off and the real neck post twist-locks. Then print `pebble_face.stl` and `pebble_facetest.stl` and check that the face plate clicks in, and that the display and camera press in.
 2. Print head, head back lid, stand, stand bottom lid and neck post ([settings](04-case.md)).
 3. Dry fit with no wires: face plate into the head, ESP32 on its rails, speaker in the lid pocket, battery in the lid cradle, radar in its rails, both lids on. Push the head onto the neck. Fix and reprint now if needed.
 
@@ -59,19 +59,19 @@ Rule of thumb: **test every part on the breadboard first, then build it into the
 
 ## Step 10: build into the case
 **Stand first:**
-1. Glue the neck post's flange under the stand top, tube leaning to the **back**. Let it set.
+1. Neck post: from inside the stand, push the tube up through the top hole with the ears turned 45° away from the left/right hooks, then turn it until it clicks. The tube now leans to the **back**.
 2. Radar: slide it up into the front rails, **antenna side facing the front**, until it touches the top.
-3. AHT20 and BMP280 on the front wall inside, left and right of the radar (foam tape), right above the vents in the bottom lid.
-4. Battery into the bottom-lid cradle. IP5306 on 0.5 mm foam tape on top of the battery, its back end on the support block.
-5. Thread the 8 neck wires up through the post. Put the bottom lid in, with the IP5306 USB-C going into the back hole. Screw it shut (4 x M2 x 6), press the rubber feet in.
+3. AHT20 and BMP280: slide each up into its own front rails, left and right of the radar, until it touches the top stop.
+4. Battery into the bottom-lid cradle (the side clips hold it left/right). IP5306 on top of the battery, its back end on the support block. Ribs under the stand top hold both down once the lid is on.
+5. Thread the 8 neck wires up through the post. Bottom lid: hook its 2 front tabs into the slots in the front wall, then press the back up until it clicks (IP5306 USB-C goes into the back hole). Press the rubber feet in. To open: a coin in the notch under the back edge.
 
 **Then the head:**
-6. Display into the face plate pocket (glass forward), camera into its pocket. A dot of glue on each. Put the face plate into the head from the back, against the front lip, then 4 dots of hot glue on its corners.
-7. Mic under the small top hole (ring of foam tape around it), BH1750 under the top window, TTP223 pad glued under the middle of the top.
-8. Push the head onto the neck post and pull the neck wires up through the head floor.
-9. ESP32 board onto its rails, USB-C to the right-side hole. Connect the camera ribbon and the display. Solder the neck wires. 2 dots of hot glue on the rails.
-10. Speaker into the pocket on the back lid, amp glued next to it (right side). Wire them.
-11. Run the tests again (`a`) before closing. Screw on the back lid (4 x M2 x 6).
+6. Display into the face plate pocket (glass forward) and camera into its pocket: both press in past small ribs. Push the face plate into the head from the back until its 4 arms click behind the catches. To remove: lid off, press the arms in.
+7. Slide the 3 top boards in from the back along their rails, parts facing down, until they stop: mic (left, over the small hole), TTP223 pad (middle), BH1750 (right, under the window).
+8. Pull the neck wires up through the head floor and push the head onto the neck post until it clicks. It can still turn by hand.
+9. ESP32 board: slide its USB-C end under the 2 lips on the right rail, then press the left end down until the clip clicks. Connect the camera ribbon and the display. Solder the neck wires.
+10. Speaker presses into the pocket on the back lid. Amp slides into its rails from the right until it stops. Wire them.
+11. Run the tests again (`a`) before closing. Press the back lid in until all 4 sides click. To open: a coin in the notch under the head, bottom right of the lid.
 
 ## Step 11: flash the real firmware
 See the [firmware plan](06-firmware-plan.md). From now on prefer OTA updates so you don't have to open the case.

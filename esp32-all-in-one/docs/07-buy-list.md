@@ -9,7 +9,7 @@ Checked against the parts inventory (AliExpress orders, Nov 2 to 10, 2026). Roug
 | 1 | **IP5306 Type-C charge + 5 V boost module** (2.1 A charge, 2.4 A out) | 2 | $3 | Charges the LiPo and runs the device at the same time. Your 5 V boost boards can't charge. Buy 2: one spare |
 | 2 | **Matte black PETG**, 1 kg | 1 | $15 | Case. A few meters of a second color for ears/details is nice |
 | 3 | **30 AWG silicone wire** kit (6 colors) | 1 | $5 | Internal harness |
-| 4 | **M2 self-tapping screws** kit (M2 × 5/6/8) | 1 | $3 | Lid, sled, board. Magnets work until these arrive |
+| 4 | ~~M2 screws~~ | 0 | $0 | Not needed: the Pebble case snaps together |
 | 5 | **Resistor kit** (1/4 W, includes 1k, 10k, 100k) | 1 | $3 | Battery divider (2 × 100k), radar series resistor (1k), camera reset pull-up (10k) |
 | 6 | **SS34 or 1N5819 Schottky diodes** | 10 | $1 | Stops USB back-feed into the ESP32 5 V pin |
 | 7 | **6 × 6 mm tact switches** | 10 | $1 | IP5306 on/off key (your SS12F15 slide switches are only 0.3 A) |
@@ -23,7 +23,7 @@ Checked against the parts inventory (AliExpress orders, Nov 2 to 10, 2026). Roug
 |---|---|
 | 470 µF 10 V electrolytic capacitors | Across the amp's 5 V if loud sounds reset the board |
 | Kapton tape | Insulating solder joints and the battery |
-| Hot glue gun (mini) | Holding display, camera, sensors in place (reversible) |
+| Hot glue gun (mini) | Not needed for the case (everything clicks in); handy for strain-relief on wires |
 | Copper tape | Extra touch pads later (TTP223 pads also work through 2 mm plastic) |
 | Clear PETG | See-through back lid |
 
