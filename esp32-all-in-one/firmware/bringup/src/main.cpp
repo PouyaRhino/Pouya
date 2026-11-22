@@ -131,6 +131,7 @@ static void cameraMirror() {
   Serial.printf("%.1f fps\n", frames * 1000.0f / (millis() - t0));
 }
 
+// USB-only build: keep vol <= 0.3 so loud peaks stay inside what a USB port can give.
 static void playTone(float hz, int ms, float vol = 0.2f) {
   const int n = 256; int32_t buf[n]; size_t w;
   int total = SAMPLE_RATE * ms / 1000; float ph = 0;
@@ -167,7 +168,7 @@ static void radarTest() {
     if (radar.isConnected())
       Serial.printf("moving %d cm (%d)  still %d cm (%d)\n", radar.movingTargetDistance(), radar.movingTargetEnergy(),
                     radar.stationaryTargetDistance(), radar.stationaryTargetEnergy());
-    else Serial.println("no UART frames yet (check TX->GPIO43 wire, 5 V supply)");
+    else Serial.println("no UART frames yet (check radar TX->GPIO1 wire, 5 V supply)");
     delay(500);
   }
 }
@@ -182,12 +183,16 @@ static void envTest() {
 }
 
 static float batteryVolts() {
+  if (VBAT_ADC < 0) return 0;           // USB-only build: no divider fitted
   uint32_t mv = 0;
   for (int i = 0; i < 16; i++) mv += analogReadMilliVolts(VBAT_ADC);
   return mv / 16.0f * 2.0f / 1000.0f;   // 100k/100k divider
 }
 
-static void batteryTest() { Serial.printf("battery %.2f V (full 4.2, empty ~3.4)\n", batteryVolts()); }
+static void batteryTest() {
+  if (VBAT_ADC < 0) { Serial.println("battery: not fitted (USB-powered build)"); return; }
+  Serial.printf("battery %.2f V (full 4.2, empty ~3.4)\n", batteryVolts());
+}
 
 static void touchTest() {
   Serial.println("touch/button: 5 s, touch the pad and press BOOT");
@@ -231,7 +236,7 @@ void setup() {
   delay(1500);
   Serial.printf("\nDesk pet bring-up. PSRAM %u bytes, flash %u bytes\n", ESP.getPsramSize(), ESP.getFlashChipSize());
   pinMode(RADAR_OUT, INPUT); pinMode(TOUCH_HEAD, INPUT); pinMode(BTN_BOOT, INPUT_PULLUP);
-  analogSetPinAttenuation(VBAT_ADC, ADC_11db);
+  if (VBAT_ADC >= 0) analogSetPinAttenuation(VBAT_ADC, ADC_11db);
   led.begin(); led.clear(); led.show();
   lcd.init(); lcd.setBrightness(200); lcd.fillScreen(TFT_BLACK);
   Wire.begin(I2C_SDA, I2C_SCL, 100000);

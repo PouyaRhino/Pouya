@@ -4,18 +4,14 @@ The picture version of [pin map](03-pinmap-power.md) + [assembly](05-assembly-br
 
 ![Full wiring](img/wiring-full.png)
 
-**Rails:** red **5V** = IP5306 output (radar, amp, and the ESP32 5V pin through a diode). Orange **3V3** = the ESP32's 3V3 pin. Black **GND** = all grounds joined.
+> **Owned-parts build (Nov 22):** USB-powered, no battery. Radar TX goes **straight to GPIO1** (no 1k), no battery divider, no IP5306, no diode. The pictures for steps 6 and 7 and the full diagram still show the old battery version: **where a picture and the text disagree, follow the text.**
+
+**Rails:** red **5V** = the ESP32 board's 5V pin, which is the USB 5 V (radar and amp). Orange **3V3** = the ESP32's 3V3 pin. Black **GND** = all grounds joined.
 **The two 5 V parts are the LD2410C radar and the MAX98357A amp.** Everything else is 3.3 V. Never put 5 V on a GPIO.
 
-## Before you start: still to buy
+## Before you start: nothing to buy
 
-| Needed for | Part |
-|---|---|
-| Step 7 (power) | **IP5306 Type-C module**, **SS34/1N5819 Schottky**, **6×6 tact button** |
-| Steps 6, 7 | **Resistors**: 1k (radar), 2 × 100k (battery sense) |
-| Step 8 (harness) | **30 AWG silicone wire**, **M2 screws** (or hot glue for now) |
-
-Steps 1 to 6 work without any of these: use breadboard jumpers and USB power. Full list: [buy list](07-buy-list.md).
+Everything below uses owned parts ([buy list](07-buy-list.md)). Wire: strip the **Dupont jumpers** (and PH 2.0 / JST 1.25 pigtails) instead of 30 AWG silicone. Power: a **5 V 2 A phone charger** and any USB-C cable.
 
 ## How each step works
 
@@ -23,7 +19,7 @@ Steps 1 to 6 work without any of these: use breadboard jumpers and USB power. Fu
 2. Plug the board in by its **native USB** port and open the serial monitor of the [bring-up firmware](../firmware/bringup) (115200).
 3. Type the test letter. Move on only when it passes.
 
-While on USB, take "5V" from the board's **5V pin** (it's the USB 5 V) and "3V3" from its **3V3 pin**. The IP5306 only takes over in step 7.
+Take "5V" from the board's **5V pin** (it's the USB 5 V) and "3V3" from its **3V3 pin**. That stays true in the finished build.
 
 ---
 
@@ -55,30 +51,29 @@ While on USB, take "5V" from the board's **5V pin** (it's the USB 5 V) and "3V3"
 
 ### Step 6 · Radar + touch
 ![](img/wiring-6-radar-touch.png)
-- Radar: **VCC→5V**, GND, its TX → **1k** → 43, OUT→46. Its RX stays unconnected. No 1k yet? Skip the radar and come back.
+- Radar: **VCC→5V**, GND, its **TX → GPIO1 directly** (no resistor), OUT→46. Its RX stays unconnected. (The picture shows the old TX → 1k → 43: ignore that part.)
 - Set the range to ~1.5 m in the **HLKRadarTool** app (Bluetooth).
 - Touch: VCC→3V3, GND, OUT→3.
 - **Test `r`:** distance values. **Test `k`:** touch the pad.
 
-### Step 7 · Power (careful)
-![](img/wiring-7-power.png)
-1. **Check the battery plug polarity with a multimeter** before it touches the IP5306. JST 1.25 plugs come wired both ways; reversed = dead charger.
-2. Battery to IP5306 B+/B−. Tact button from KEY to GND. Press: 5.0 to 5.2 V on 5V OUT.
-3. 5V OUT → radar VCC and amp VIN directly, and → **Schottky (stripe toward the ESP32)** → board 5V pin. GND to GND.
-4. Divider: B+ → 100k → GPIO1 → 100k → GND.
-5. **Test `b`:** 3.7 to 4.2 V. Unplug the PC, run on battery, **test `a`** (all). Resets on beeps = 5 V sags: add 470 µF across the amp VIN/GND.
+### Step 7 · Power (USB only)
+1. Nothing new to wire: radar and amp already take 5 V from the board's 5V pin.
+2. Swap the PC for a **5 V 2 A phone charger**, plug into the board's native USB port, run **test `a`** (all). `b` now just says "not fitted".
+3. Resets during beeps = 5 V sags: lower the volume (`vol` in `playTone()`, keep it ≤ 0.3) or use a stronger charger.
+4. **Leave the LiPo out.** Nothing owned is known to charge it. If one of your 5 V boost boards turns out to be a charge + boost board, see the battery option in the [buy list](07-buy-list.md) first.
 
-Button: 1 press = on, 2 quick presses = off.
+(The step 7 picture shows the old IP5306 + battery wiring. Skip it.)
 
 ### Step 8 · Into the case
 ![](img/build-8-assembly.png)
 
 **Harness tips**
-- 30 AWG silicone, each wire ~2 cm longer than the straight path. Keep the colours: red 5 V, orange 3.3 V (white if your kit has no orange), black GND.
+- Stripped Dupont jumpers (owned), each wire ~3 cm longer than the straight path; they're stiffer than silicone. Too short? Solder two together and tape the joint. Keep the colours: red 5 V, orange 3.3 V (white if your kit has no orange), black GND.
 - Solder straight to the ESP32 pins (no headers): the board sits on rails and the wires run underneath.
-- The **8 neck wires** (SDA, SCL, 3V3, VBAT, radar TX, radar OUT, GND, 5V): +3 cm slack, twisted loosely. The 1k sits at the radar end, the divider and the Schottky as shown.
-- Speaker on a PH 2.0 plug, battery on its JST 1.25, so the lids come off.
-- Insulate joints with heat-shrink or Kapton.
+- The **7 neck wires** (SDA, SCL, 3V3, radar TX→GPIO1, radar OUT, GND, 5V): +4 cm slack, twisted loosely. No resistor, divider or diode anywhere.
+- Speaker on a PH 2.0 plug, so the lid comes off. The stand's battery bay stays empty.
+- The USB-C cable plugs into the head's **right side** (the ESP32's own port). The hole at the back of the stand is unused.
+- Insulate joints with electrical tape or a dab of hot glue.
 
 Then flash the real firmware ([plan](06-firmware-plan.md)) and use OTA from then on.
 

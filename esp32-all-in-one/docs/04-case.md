@@ -48,7 +48,7 @@ The design follows what the best-rated desk robots have in common (Emo, Doly, St
 | BH1750 | Under the top, 4 mm window, slides into rails | Sees room light |
 | TTP223 | Under the middle of the top, slides into rails | Pat the head |
 | Battery 65 × 36 × 10 | Stand, in a cradle on the bottom lid, ribs above it | 1.5 mm spare each side; keeps the weight low |
-| IP5306 charger | On top of the battery, USB-C out the back | Charge port at the back |
+| IP5306 charger | On top of the battery, USB-C out the back | **Not fitted in the owned-parts USB build** (battery bay and back USB hole stay empty; power goes into the ESP32 port on the head's right side) |
 | LD2410C radar | Stand front, slides into rails, 1 mm chest window | mmWave passes through thin PETG |
 | AHT20 / BMP280 | Stand front wall in their own rails, vents in the bottom lid | Away from the ESP32 heat in the head |
 
