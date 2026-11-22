@@ -34,7 +34,7 @@ The design follows what the best-rated desk robots have in common (Emo, Doly, St
  ┌────────┴┴───────┐ STAND  battery on the bottom lid, charger on top of it
  │radar  battery   │        radar behind a 1 mm "chest" window at the front
  └─────────────────┘        temp + pressure sensors at the front, vents underneath
-                            back: charger USB-C, LED slot, power button
+                            back: charger USB-C, LED slot, touch power key (no hole)
                             bottom lid: 2 front tabs + 3 clicking edges
 ```
 
@@ -50,7 +50,8 @@ The design follows what the best-rated desk robots have in common (Emo, Doly, St
 | Battery 65 × 36 × 10 | Stand, in a cradle on the bottom lid, ribs above it | 1.5 mm spare each side; keeps the weight low |
 | IP5306 charger | On top of the battery, USB-C out the back | Charge port at the back |
 | LD2410C radar | Stand front, slides into rails, 1 mm chest window | mmWave passes through thin PETG |
-| AHT20 / BMP280 | Stand front wall in their own rails, vents in the bottom lid | Away from the ESP32 heat in the head |
+| AHT20 / BMP280 | Stand front wall in their own rails, vents in the bottom lid |
+| TTP223 power key | Stand back wall in rails, behind a 1.2 mm thin spot with a dimple outside | Touch-to-power-on through the plastic, uses an owned part, no button hole | Away from the ESP32 heat in the head |
 
 **Fit check done in the model:** `PART="clash"` with `-D CRUSH=-0.05` checks every part against every printed piece (14 pairs, `CI=0..13` shows one pair, including the neck post's path when it is pushed in and turned). Nothing overlaps; parts only rest on their ledges. The only touch is the detent the neck pawl clicks past, on purpose. The tilted head clears the stand by 2.5 mm at the back.
 
@@ -66,7 +67,7 @@ The design follows what the best-rated desk robots have in common (Emo, Doly, St
 | Display, camera, speaker | Press-fit pockets with crush ribs (0.15 mm) | Pull out |
 | ESP32 board | USB end under 2 lips, other end clicks under a long clip arm | Push the clip arm out |
 | Mic, BH1750, TTP223 | Slide into rails under the top from the back, stop at the front | Slide out |
-| Radar, AHT20, BMP280 | Slide up into rails on the stand front wall; the lid holds them up | Lid off, slide down |
+| Radar, AHT20, BMP280, TTP223 power key | Slide into rails on the stand front/back wall; the lid holds them up | Lid off, slide down |
 | Battery, IP5306 | Cradle on the lid; ribs under the stand top keep them from lifting | Lid off |
 | Amp | Slides into 2 rails on the back lid until it stops | Slide out |
 
@@ -79,7 +80,7 @@ All marked `MEASURE` at the top of `pebble_case.scad`:
 1. **Display:** module PCB size (`LCD_PCB`), thickness with glass (`LCD_T`), visible glass area (`LCD_WIN`).
 2. **ESP32 CAM board:** length and width (`ESP`) and the USB-C height (`USB_Z`).
 3. **Camera:** lens diameter and body size (`CAM_LENS`, `CAM_BODY`).
-4. **IP5306 module** (when it arrives): size (`IPM`) and USB-C height (`IPM_USB_Z`).
+4. **IP5306 module** (when it arrives): size (`IPM`) and USB-C height (`IPM_USB_Z`). **TTP223 board** for the power key: width and height (`PWR`).
 5. **Battery and speaker:** confirm 65 × 36 × 10 and 35 × 25 × 6.5.
 
 Then print **`pebble_snaptest.stl`** first (25 min, 10 g): a piece of the stand top with the neck lock, plus a small frame and lid with the real lid beams. Check the lid clicks on and off, and that the real `pebble_post.stl` twist-locks and clicks. If the lid is too tight, lower `BUMP` by 0.1; too loose, raise it. Then print **`pebble_face.stl`** and **`pebble_facetest.stl`** (the face plate and the first 17 mm of the head with its catches, about 1.2 h). Check the plate clicks in and the display and camera press in. Fix the numbers, re-export, then print the rest.
@@ -139,5 +140,5 @@ Photo renders (optional, needs Blender 4): export `PART="w_head"`, `w_face`, `w_
 
 ## Fasteners
 
-- None. No screws, no glue.
-- 4 small rubber feet (8 mm) press into the recesses under the stand (optional).
+- None. No screws, no glue, no magnets, no rubber feet. Only parts you already own.
+- Want more grip on the desk? A few dots of anything rubbery (or a strip of the foam tape) under the lid. Optional.

@@ -46,6 +46,7 @@ IPM = [25, 17]; IPM_X = SW / 2; IPM_Y = SD - W - 17 - 0.4;      // IP5306 module
 IPM_Z = W + BAT[2] + 0.5;  IPM_USB_Z = IPM_Z + 1.6 + 1.6;
 RAD = [22, 16]; RAD_Z = SH - W - 8 - 0.3;                        // LD2410C, slides up to the top
 SENS_X = [10, 50];                                               // AHT20 / BMP280 on the front wall
+PWR = [55.7, 11, 15];   // power key: owned TTP223 touch board on the back wall [x centre, width, height] (MEASURE)
 
 // ---------------- neck ----------------
 TILT = 6;                          // head looks up by this many degrees
@@ -340,6 +341,11 @@ module stand_inside() {
     // radar rails (slides in from below up to the top) and sensor rails
     front_rails(SW / 2, RAD[0], RAD_Z - RAD[1] / 2 - 1, SH + 1);
     for (x = SENS_X) front_rails(x + 6, 12, 4, 18.2);
+    // power key: TTP223 touch board against the back wall, rests on the bottom lid
+    intersection() {   // left rail trimmed to clear the charger board and the lid's back beam
+        translate([0, SD, 0]) mirror([0, 1, 0]) front_rails(PWR[0], PWR[1], W, W + PWR[2] + 0.3);
+        translate([IPM_X + IPM[0] / 2 + 0.7, 0, 0]) cube([SW, SD, SH]);
+    }
     // lid stops (full height columns)
     for (b = SBOSS) zcyl([b[0], b[1], W], 5, SH - W);
     // neck twist lock: per side a lip under the post's ear, an outer wall and an end stop
@@ -362,8 +368,10 @@ module stand_cuts() {
     zcyl([NB[0], NB[1], SH - W - 1], NECK_OD + 1, W + 2);
     // back: charger USB-C, LED slot, power button
     hull() for (s = [-1, 1]) ycyl([IPM_X + s * 3, SD - W - 1, IPM_USB_Z], 6.5, W + 2);
-    boxc([IPM_X + 11, SD - W / 2, IPM_USB_Z], [5, W + 2, 2]);
-    ycyl([SW - 12, SD - W - 1, 9], 6.5, W + 2);
+    boxc([IPM_X + 9.5, SD - W / 2, IPM_USB_Z], [3, W + 2, 2]);
+    // power key: no hole. Wall thinned to 1.2 mm in front of the touch pad, small dimple outside marks the spot
+    translate([PWR[0] - PWR[1] / 2 + 0.5, SD - W - 0.01, W + 2]) cube([PWR[1] - 1, 0.81, PWR[2] - 3]);
+    translate([PWR[0], SD + 0.01, W + 1 + PWR[2] / 2]) rotate([90, 0, 0]) cylinder(d = 7, h = 0.4);
     // grooves for the bottom-lid beams, slots for its 2 front tabs
     for (e = LIDS) frame(e) groove(e[4]);
     for (x = SENS_X) translate([x + 2.5, 0.9, 2.4]) cube([7, W - 0.9 + 0.01, 1.5]);
@@ -392,8 +400,6 @@ module stand_lid() {
         }
         // vents under the temp/pressure sensors
         for (x = SENS_X) for (k = [0 : 1]) boxc([x + 6, 5 + k * 2.2, W / 2], [10, 1.2, W + 2]);
-        // rubber feet recesses
-        for (x = [11, SW - 11], y = [11, SD - 11]) zcyl([x, y, -1], 8.4, 1.8);
         for (e = LIDS) frame(e) beam_slot(e[4]);
     }
 }
@@ -454,6 +460,7 @@ module stand_parts() {
     color("#aaa") translate([IPM_X - 4.5, IPM_Y + IPM[1] - 6.5, IPM_Z + 1.6]) cube([9, 7.5, 3.2]);
     color("#3a8a3a") translate([SW / 2 - RAD[0] / 2, W, RAD_Z - RAD[1] / 2]) cube([RAD[0], 1.6, RAD[1]]);
     for (x = SENS_X) color("#8844aa") translate([x, W, 6]) cube([12, 1.6, 12]);
+    color("#d33") translate([PWR[0] - PWR[1] / 2, SD - W - 1.6, W + 0.1]) cube([PWR[1], 1.6, PWR[2]]);
 }
 
 SHELL = "#e9e3d8"; DARK = "#2a2a2c"; FACEC = "#0b0b0d";

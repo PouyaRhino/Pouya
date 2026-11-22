@@ -41,7 +41,7 @@ Rule of thumb: **test every part on the breadboard first, then build it into the
 ## Step 7: power (30 min, careful)
 1. **Check the LiPo plug polarity** against the IP5306 board's battery pads with a multimeter. JST 1.25 batteries from different sellers are wired both ways. Reversed = dead charger.
 2. Solder the battery leads (or a JST 1.25 socket) to the IP5306 B+ / B-.
-3. Press its key: measure 5.0 to 5.2 V on its output. Charge through its USB-C: its LEDs show the level.
+3. Wire the TTP223 power key (VCC to battery +, OUT to KEY, A pad bridged) and tap it: measure 5.0 to 5.2 V on the output. Charge through its USB-C: its LEDs show the level.
 4. Wire: IP5306 5 V → LD2410C + MAX98357A VIN directly, and → Schottky diode (stripe toward the ESP32) → ESP32 **5V** pin. GND to GND everywhere.
 5. Battery sense: 100k + 100k divider from battery + to GND, middle to GPIO1. Type `b`: should show 3.7 to 4.2 V.
 6. Unplug USB from the PC, power from the battery only, repeat `a` (all tests). If the board resets during beeps, the 5 V sags: add the 470 µF capacitor across the amp's VIN/GND.
@@ -61,9 +61,9 @@ Rule of thumb: **test every part on the breadboard first, then build it into the
 **Stand first:**
 1. Neck post: from inside the stand, push the tube up through the top hole with the ears turned 45° away from the left/right hooks, then turn it until it clicks. The tube now leans to the **back**.
 2. Radar: slide it up into the front rails, **antenna side facing the front**, until it touches the top.
-3. AHT20 and BMP280: slide each up into its own front rails, left and right of the radar, until it touches the top stop.
+3. AHT20 and BMP280: slide each up into its own front rails, left and right of the radar, until it touches the top stop. Power key: slide the TTP223 board (A pad bridged) down into the rails on the back wall, touch pad facing the wall, right behind the dimple.
 4. Battery into the bottom-lid cradle (the side clips hold it left/right). IP5306 on top of the battery, its back end on the support block. Ribs under the stand top hold both down once the lid is on.
-5. Thread the 8 neck wires up through the post. Bottom lid: hook its 2 front tabs into the slots in the front wall, then press the back up until it clicks (IP5306 USB-C goes into the back hole). Press the rubber feet in. To open: a coin in the notch under the back edge.
+5. Thread the 8 neck wires up through the post. Bottom lid: hook its 2 front tabs into the slots in the front wall, then press the back up until it clicks (IP5306 USB-C goes into the back hole). To open: a coin in the notch under the back edge.
 
 **Then the head:**
 6. Display into the face plate pocket (glass forward) and camera into its pocket: both press in past small ribs. Push the face plate into the head from the back until its 4 arms click behind the catches. To remove: lid off, press the arms in.

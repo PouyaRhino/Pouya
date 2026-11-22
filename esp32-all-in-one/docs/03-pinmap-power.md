@@ -81,7 +81,7 @@ USB-C 5V ──> [IP5306 module] ──5.1V──┬──> LD2410C VCC (5 V)
 
 - **Charger: IP5306 Type-C module (to buy).** Charge + 5 V boost + "run while charging" in one board. Your owned 5 V boost boards are boost-only: they can't charge the LiPo, so they're spares.
 - **Schottky diode (SS34 or 1N5819) into the ESP32 5V pin.** It stops the IP5306 and the ESP32's own USB port back-feeding each other when you plug in the USB cable for flashing.
-- **Power switch:** the SS12F15 slide switches you own are rated **0.3 A**, too weak for the battery line (peaks ~1.5 A). Use the IP5306's KEY input instead: a small tact button on KEY to GND. One press = on, two quick presses = off. Bonus: wire KEY through a 10k resistor to a GPIO later if you want software power-off.
+- **Power switch:** the SS12F15 slide switches you own are rated **0.3 A**, too weak for the battery line (peaks ~1.5 A). Use the IP5306's KEY input instead, driven by one of your **TTP223 touch boards** (owned, no button to buy, no hole in the case): TTP223 VCC to battery +, GND to GND, OUT to KEY, and bridge its **A** pad so the output goes LOW when touched. It sits behind a thinned spot in the stand's back wall (marked by a small dimple). One tap = on, two quick taps = off. It draws only a few µA from the battery. Bonus: wire KEY through a 10k resistor to a GPIO later if you want software power-off.
 - **Battery sense:** 100k from battery + to GPIO1, 100k from GPIO1 to GND. Draws 18 µA. Reading × 2 = battery volts.
 
 ### Power budget (5 V side, from datasheet typicals)

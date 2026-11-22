@@ -12,7 +12,7 @@ Checked against the parts inventory (AliExpress orders, Nov 2 to 10, 2026). Roug
 | 4 | ~~M2 screws~~ | 0 | $0 | Not needed: the Pebble case snaps together |
 | 5 | **Resistor kit** (1/4 W, includes 1k, 10k, 100k) | 1 | $3 | Battery divider (2 × 100k), radar series resistor (1k), camera reset pull-up (10k) |
 | 6 | **SS34 or 1N5819 Schottky diodes** | 10 | $1 | Stops USB back-feed into the ESP32 5 V pin |
-| 7 | **6 × 6 mm tact switches** | 10 | $1 | IP5306 on/off key (your SS12F15 slide switches are only 0.3 A) |
+| 7 | ~~Tact switches~~ | 0 | $0 | Not needed: an owned TTP223 touch board is the power key |
 | 8 | **Right-angle USB-C cable** | 2 | $4 | Plugs into the bottom through the stand's channel |
 
 **Subtotal ≈ $35.**
