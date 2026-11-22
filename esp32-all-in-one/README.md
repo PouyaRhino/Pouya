@@ -16,7 +16,8 @@ A palm-sized desk companion built only from parts you own or have on order: anim
 | 4 | [Case](docs/04-case.md) | "Pebble": head with a black face on a small stand. OpenSCAD model, STLs, renders, print settings |
 | 5 | [Assembly and bring-up](docs/05-assembly-bringup.md) | Steps from breadboard to finished robot |
 | 6 | [Firmware plan](docs/06-firmware-plan.md) | Bring-up → pet moods → XiaoZhi AI voice |
-| 7 | [Buy list](docs/07-buy-list.md) | ~$35 of missing parts, IP5306 charger first |
+| 7 | [Buy list](docs/07-buy-list.md) | Nothing to buy: USB-powered owned-parts build |
+| 8 | [Wiring and build guide](docs/08-wiring-build-guide.md) | Colour wiring diagram + step-by-step pictures with a test after each module |
 
 ## Folder layout
 
@@ -33,7 +34,7 @@ docs/                    the plan
 
 ## The 5 things that matter most
 1. **Use the S3 N16R8 CAM board** (in transit) as the main board: it powers the OV5640 properly.
-2. **Buy an IP5306 Type-C module.** Your 5 V boost boards can't charge the LiPo.
+2. **Runs on USB, no battery.** Nothing owned is known to charge the LiPo, so it stays out (see the buy list for the check).
 3. **Never use GPIO35-37** (PSRAM) **or GPIO45** (boot strap). The map uses every other free pin.
 4. **Measure your display and board**, update `MEASURE` values, print `pebble_snaptest.stl`, then the face plate and `pebble_facetest.stl`, before the full head.
-5. **Check LiPo plug polarity** with a meter before connecting it to anything.
+5. **Radar TX goes to GPIO1** (no resistor). GPIO43 stays free: it prints the boot log.

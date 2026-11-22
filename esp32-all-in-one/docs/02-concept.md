@@ -9,7 +9,7 @@ A palm-sized pet that lives next to your monitor. Its face is the screen: two bi
 | Face | Estardyn 2.01" 240×296 TFT (1.69" is a drop-in option in the CAD) |
 | Senses | OV5640 camera, LD2410C presence radar, INMP441 mic, AHT20+BMP280, BH1750, TTP223 head-pat |
 | Voice | MAX98357A + 2535 4 Ω 3 W speaker |
-| Power | 3000 mAh LiPo + IP5306 USB-C charger, ~6 h awake on battery, lives on USB at the desk |
+| Power | USB-C 5 V (phone charger) into the ESP32 board. No battery in the owned-parts build |
 | Firmware | Stage 1 bring-up and Stage 2 pet in PlatformIO/Arduino, Stage 3 AI voice on XiaoZhi (ESP-IDF) |
 
 **Why this concept:** every part you bought gets a job, it needs no moving parts, and it can be built in stages where each stage is already fun (face → moods → voice → vision).

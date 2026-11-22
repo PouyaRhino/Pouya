@@ -43,12 +43,13 @@
 #define I2S_DIN         2   // from INMP441 SD
 
 // ---- Presence radar, HLK-LD2410C ----
-#define RADAR_RX       43   // ESP RX <- LD2410C TX (through 1k resistor), UART1, 256000 baud
+#define RADAR_RX        1   // ESP RX <- LD2410C TX (direct, no resistor needed), UART1, 256000 baud
+                            // (was 43 + 1k; 43 is the boot-log TX pin, now left free)
 #define RADAR_TX       -1   // not wired: configure the radar with the HLKRadarTool app over BLE
 #define RADAR_OUT      46   // presence output, HIGH = someone there
 
 // ---- Inputs / misc ----
 #define TOUCH_HEAD      3   // TTP223 OUT (idles LOW, safe for the GPIO3 strap)
 #define BTN_BOOT        0   // onboard BOOT button, usable as a user button after boot
-#define VBAT_ADC        1   // battery via 100k/100k divider (ADC1_CH0)
+#define VBAT_ADC       -1   // no battery sense in the owned-parts build (GPIO1 is the radar RX now)
 #define RGB_LED        48   // onboard WS2812 on most N16R8 boards (some use 38: check yours!)

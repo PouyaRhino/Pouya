@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;width:2000px;height:800px;background:#F7F5F0;font-family:Inter,sans-serif;color:#1b1b1b;display:flex}
+.l{width:820px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.l img{width:720px}
+.r{flex:1;padding:50px 60px 40px 10px}
+h1{font-size:46px;margin:0 0 6px;font-weight:900}.sub{color:#666;font-size:22px;margin-bottom:26px}
+.col{display:flex;gap:40px}.box{flex:1;background:#fff;border-radius:22px;padding:24px 28px;border:2px solid #ddd}
+.box h2{margin:0 0 14px;font-size:28px;font-weight:900}.stand h2{color:#5F6B78}.head h2{color:#B88A3A}
+ol{margin:0;padding-left:30px;font-size:21px;line-height:1.45}li{margin-bottom:8px}b{font-weight:800}
+.warn{margin-top:26px;background:#1b1b1b;color:#fff;border-radius:18px;padding:18px 26px;font-size:21px;line-height:1.5}
+.warn b{color:#FFD54F}
+</style></head><body>
+<div class="l"><img src="../../../case/img/pebble-back.png"></div>
+<div class="r"><h1>Step 8 · Build it into the case</h1>
+<div class="sub">Only after every module passed its test on the bench. Stand first, then head.</div>
+<div class="col">
+<div class="box stand"><h2>STAND</h2><ol>
+<li>Glue the <b>neck post</b> flange under the stand top, tube leaning to the back.</li>
+<li><b>Radar</b> into the front rails, antenna side to the front.</li>
+<li><b>AHT20 + BMP280</b> on the front wall (foam tape), above the vents.</li>
+<li><b>Battery</b> in the bottom-lid cradle, <b>IP5306</b> on foam tape on top, USB-C to the back hole.</li>
+<li>Thread the <b>8 neck wires</b> up through the post, then close the bottom lid.</li>
+</ol></div>
+<div class="box head"><h2>HEAD</h2><ol start="6">
+<li><b>Display + camera</b> into the black face plate, plate into the head, 4 dots of hot glue.</li>
+<li><b>Mic</b> under the top hole, <b>BH1750</b> under the window, <b>TTP223</b> under the middle.</li>
+<li>Push the head onto the post, pull the neck wires up.</li>
+<li><b>ESP32</b> on its rails, USB-C to the right hole. Ribbon + display, solder the neck wires.</li>
+<li><b>Speaker + amp</b> on the back lid. Run test <b>a</b> again, then close the lid.</li>
+</ol></div></div>
+<div class="warn"><b>Battery last.</b> Solder the whole harness first, plug the LiPo in at the very end. Keep the iron away from it.<br>
+<b>Lids:</b> fix them the way the current case version says (screws or snap-fits).</div>
+</div></body></html>
